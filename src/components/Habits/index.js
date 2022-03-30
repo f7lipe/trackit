@@ -1,25 +1,29 @@
 import Habit from "../Habit"
 import NewHabit from "../NewHabit"
 import styled from "styled-components"
+import { useState } from "react"
+function Habits() {
+    const [newHabit, setNewHabit] = useState(false)
+    return (
+        <Main>
+            <TitleLabel>
+                <h1>Meus hábitos</h1>
+                <AddButton onClick={()=>setNewHabit(true)}>+</AddButton>
+            </TitleLabel>
 
-function Habits(){
-    return(
-    <Main>
-        <TitleLabel><h1>Meus hábitos</h1><AddButton>+</AddButton></TitleLabel>
-        
-        {/*
+            {/*
         <ViewLabel>
         Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
         </ViewLabel>
         */}
-        
-       {/* <NewHabit/> */}
-        <Habit/>
-        <Habit/>
-        <Habit/>
-        <Habit/>
-        <Habit/>
-    </Main>
+
+            {newHabit && <NewHabit newHabitCallback={setNewHabit}/>}
+            <Habit />
+            <Habit />
+            <Habit />
+            <Habit />
+            <Habit />
+        </Main>
     )
 }
 

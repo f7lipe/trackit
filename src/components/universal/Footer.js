@@ -1,20 +1,29 @@
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { useState } from "react";
+function Footer(props){
+    const {switchPageCallback} = props
 
-function Footer(){
+    const [selectedPage, setSelectedPage] = useState(0)
+    function switchPage(pageIndex){
+        switchPageCallback(pageIndex)
+        setSelectedPage(pageIndex)
+    }
+
+
     return(
         <ToolBar>
-            <Item>Hábitos</Item>
-            <ProgressBar>
+            <Item onClick={()=>switchPage(0)} selected={selectedPage === 0}>Hábitos</Item>
+            <ProgressBar onClick={()=>switchPage(1)}>
             <CircularProgressbar value={60} text={`${'Hoje'}`} background         styles={buildStyles({
-          backgroundColor: "rgb(247, 247, 247)",
-          textColor: "#FF3B30",
-          pathColor: "#FF3B30",
+          backgroundColor: `${selectedPage === 1 ? `rgb(234, 77, 61)` : `rgb(247, 247, 247)`} `,
+          textColor:  `${selectedPage === 1 ? `white` : `#FF3B30`} `,
+          pathColor: `${selectedPage === 1 ? `white` : `#FF3B30`} `,
           trailColor: "transparent"
         })} />
             </ProgressBar>
-           <Item>Histórico</Item> 
+           <Item onClick={()=>switchPage(2)} selected={selectedPage === 2}>Histórico</Item> 
         </ToolBar>
     )
 }
@@ -36,8 +45,8 @@ const Item = styled.p`
 font-family: 'Recursive', sans-serif;
 font-style: normal;
 font-size: medium;
-font-weight: 400;
-color: rgb(234, 77, 61);
+font-weight:  ${props => props.selected ? `800` : `400`};
+color: ${props => props.selected ? `rgb(234, 77, 61)` : `gray`};
 `
 const ProgressBar = styled.div`
 width: 90px;

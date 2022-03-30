@@ -1,10 +1,12 @@
 import Weekdays from "../universal/Weekdays";
 import styled from "styled-components";
 
-function NewHabit(){
+function NewHabit(props){
+
+    const {newHabitCallback} = props
 
     return(
-        <NewHabit>   
+        <NewHabitCard>   
             <Form>
                 <Label>
                     <Input type="text" name="habit" placeholder="nome do hábito" required />
@@ -13,12 +15,12 @@ function NewHabit(){
                 <Weekdays></Weekdays>
                 </Label>
                 <ActionButtons>
-                <ActionButton inputColor="gray" type="button" value="Cancelar" />
+                <ActionButton inputColor="gray" type="button" value="Cancelar" onClick={()=>newHabitCallback(false)}/>
                 <ActionButton  type="submit" value="Salvar" />
                 </ActionButtons>
                 
             </Form>
-        </NewHabit>
+        </NewHabitCard>
     )
 }
 
@@ -33,6 +35,7 @@ padding: 20px;
 border-radius: 10px; 
 background-color: white;
 box-shadow: 0px 2px 4px rgba(10, 10, 10, 0.30);
+margin-bottom: 60px;
 `
 
 const Form = styled.form`
