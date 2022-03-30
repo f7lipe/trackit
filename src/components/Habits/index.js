@@ -44,10 +44,14 @@ height: 50px;
 const AddButton = styled.button`
 width: 32px;
 height: 32px;
+font-size: xx-large;
+display: flex;
+align-items: center;
+justify-content: center;
 color: white; 
 border: none;
 border-radius: 50px; 
-background-color: red; 
+background-color: black; 
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 `
 

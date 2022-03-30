@@ -1,22 +1,36 @@
 import WeekDay from "./Weekday"
 import styled from "styled-components"
+import { useState } from "react"
 
 const weekdays = {
-    'Domingo': 'D',
-    'Segunda-feira': 'S',
-    'Terça-feira': 'T',
-    'Quarta-feira': 'Q',
-    'Quinta-feira': 'Q',
-    'Sexta-feira': 'S',
-    'Sábado-feira': 'S'
+    0 : 'D',
+    1 : 'S',
+    2 : 'T',
+    3 : 'Q',
+    4 : 'Q',
+    5 : 'S',
+    6 : 'S'
 }
 
-function Weekdays() {
+function Weekdays(props) {
+    const {isSelectable, callback} = props
+    const [selectedDay, setSelectedDay] = useState(new Set())
+    
+    function toggleSelection(index){
+        
+        const selectedDays = new Set(selectedDay)
+
+        if(selectedDays.has(index)) selectedDays.delete(index)
+        else  selectedDays.add(index)
+        
+        setSelectedDay(selectedDays)
+        callback([...selectedDays])
+    }
     return (
         <Days>
             {
-                Object.values(weekdays).map(day => {
-                    return <WeekDay day={day} />
+                Object.values(weekdays).map((day, index) => {
+                    return <WeekDay day={day} selecting={(key_) => toggleSelection(key_)} key_={index} isSelectable={isSelectable}/>
                 })
             }
         </Days>

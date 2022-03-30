@@ -1,9 +1,18 @@
 import styled from "styled-components";
-
+import { useState } from "react";
 
 function WeekDay(props){
-    const {day, isSelected} = props
-    return(<Day selected={false}>{day}</Day>)
+    const {day, selecting, key_, isSelectable} = props
+    const [selected, setSelected] = useState(false) 
+
+    function manageClick(selectedDay){
+        if (isSelectable){
+            selecting(selectedDay)
+            setSelected(!selected)
+        }
+    }
+
+    return(<Day selected={selected} onClick={()=> manageClick(key_)}>{day}</Day>)
 }
 
 const Day = styled.div`

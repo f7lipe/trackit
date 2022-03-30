@@ -1,18 +1,25 @@
 import Weekdays from "../universal/Weekdays";
 import styled from "styled-components";
+import { useState } from "react";
 
 function NewHabit(props){
 
     const {newHabitCallback} = props
+    const [habitName, setHabitName] = useState("")
+    const [selectedDays, setSelectedDays] = useState([])
+    
+    function submit(event){
+
+    }
 
     return(
         <NewHabitCard>   
-            <Form>
+            <Form onSubmit={submit}>
                 <Label>
-                    <Input type="text" name="habit" placeholder="nome do hábito" required />
+                    <Input type="text" name="habit" placeholder="nome do hábito" value={habitName} onChange={(e) => setHabitName(e.target.value)} required />
                 </Label>
                 <Label>
-                <Weekdays></Weekdays>
+                <Weekdays isSelectable={true} callback={setSelectedDays}/>
                 </Label>
                 <ActionButtons>
                 <ActionButton inputColor="gray" type="button" value="Cancelar" onClick={()=>newHabitCallback(false)}/>
