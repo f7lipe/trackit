@@ -1,31 +1,46 @@
 import Habit from "../Habit"
 import NewHabit from "../NewHabit"
 import styled from "styled-components"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import axios from "axios"
 
 function Habits(props) {
     const [newHabit, setNewHabit] = useState(false)
-    const {token} = props
+    const [habits, setHabits] = useState([])
+    const { token } = props
+
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
+
+    function getHabits(){
+        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
+        const promise = axios.get(URL, config)
+        promise.then(response=>{
+            const data = response.data
+            setHabits(data)
+            console.log(data)
+        })
+    }
+    useEffect(getHabits,[]) //carrega na primeira inicialização
     
+
     return (
         <Main>
             <TitleLabel>
                 <h1>Meus hábitos</h1>
-                <AddButton onClick={()=>setNewHabit(true)}>+</AddButton>
+                <AddButton onClick={() => setNewHabit(true)}>+</AddButton>
             </TitleLabel>
 
-            {/*
-        <ViewLabel>
-        Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-        </ViewLabel>
-        */}
+            {newHabit && <NewHabit token={token} newHabitCallback={setNewHabit} />}
 
-            {newHabit && <NewHabit token={token} newHabitCallback={setNewHabit}/>}
-            <Habit />
-            <Habit />
-            <Habit />
-            <Habit />
-            <Habit />
+            {habits.length === 0 &&
+                <ViewLabel>
+                    Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+                </ViewLabel>}
+           
+                
+            {habits.map(habit => <Habit key={habit.id} name={habit.name} days={habit.days}/>)}
         </Main>
     )
 }

@@ -13,7 +13,7 @@ const weekdays = {
 }
 
 function Weekdays(props) {
-    const {isSelectable, callback} = props
+    const {isSelectable, callback, days} = props
     const [selectedDay, setSelectedDay] = useState(new Set())
     
     function toggleSelection(index){
@@ -30,7 +30,7 @@ function Weekdays(props) {
         <Days>
             {
                 Object.values(weekdays).map((day, index) => {
-                    return <WeekDay day={day} selecting={(key_) => toggleSelection(key_)} key_={index} isSelectable={isSelectable}/>
+                    return <WeekDay isSelected={false} day={day} selecting={(key_) => toggleSelection(key_)} key_={index} isSelectable={isSelectable}/>
                 })
             }
         </Days>
