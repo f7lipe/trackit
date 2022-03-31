@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 
 
-function Navbar(){
-    return(
+function Navbar(props) {
+    const { image } = props
+    return (
 
         <Header>
             <Logo>TrackIt</Logo>
-            <ProfPic> </ProfPic>
+            <ProfPic>
+               <Image src={image}/>
+            </ProfPic>
         </Header>
-        
+
     )
-    
+
 }
 
 const Header = styled.header`
@@ -37,7 +40,12 @@ const ProfPic = styled.div`
 width: 45px;
 height: 45px;
 background: white;
-border: 1px gray dashed;
+border: 1px gray;
+border-radius: 50px;
+`
+const Image = styled.img`
+width: 45px;
+height: 45px;
 border-radius: 50px;
 `
 

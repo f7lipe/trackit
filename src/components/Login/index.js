@@ -4,26 +4,34 @@ import Brand from "../universal/Logo"
 
 import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import { useState} from "react"
+import { useState } from "react"
+
+import TokenContext from "../../contexts/TokenContext";
+import ImageContext from "../../contexts/ImageContext";
+import { useContext } from "react";
 
 function Login() {
+
+    const {token, setToken} = useContext(TokenContext)
+    const {image, setImage} = useContext(ImageContext)
     
     const [signinData, setSigninData] = useState({email:'', password:''})
     const [loading, setLoading] = useState(false)
-
     const redirectUser = useNavigate()
-
+    
     function login(event){
         event.preventDefault()
         setLoading(true)
-        const SIGNIN_API = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
-        const promise = axios.post(SIGNIN_API,
+        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
+        const promise = axios.post(URL,
             {
                 email: signinData.email, 
                 password: signinData.password
             })
         promise.then(response => {
-            console.log(response)
+            const contextValue = response.data //{id, name, image, email, password, token}
+            setToken(contextValue.token)
+            setImage(contextValue.image)
             redirectUser("/app")
         })
         promise.catch(err =>{
@@ -31,7 +39,7 @@ function Login() {
             setLoading(false)
         })
     }
-
+ 
     return (
         <Main>
             <Brand />
