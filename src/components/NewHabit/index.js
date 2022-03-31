@@ -1,15 +1,49 @@
 import Weekdays from "../universal/Weekdays";
 import styled from "styled-components";
 import { useState } from "react";
+import axios from "axios";
 
 function NewHabit(props){
 
-    const {newHabitCallback} = props
+    const {newHabitCallback, token} = props
     const [habitName, setHabitName] = useState("")
     const [selectedDays, setSelectedDays] = useState([])
+    const [loading, setLoading] = useState(false)
     
     function submit(event){
+        
+        event.preventDefault()
 
+        if(verify()){
+            setLoading(true)
+            const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+            
+            const bodyParameters = {
+                name: habitName, 
+                days: selectedDays
+             }
+    
+            const promise =  axios.post(URL, bodyParameters, config)
+            promise.then(response =>{
+                newHabitCallback(false) //altera o estado de NewHabit
+            }) 
+            promise.catch(err =>{
+                alert(`Houve uma falha ao cadastrar seu hábito.\n Resposta do servidor: ${err.response.statusText}`)
+                setLoading(false)
+            })
+    
+        }
+    }
+
+    function verify(){
+        if (selectedDays.length === 0){
+            alert("Selecione pelo menos um dia da semana") 
+            return false
+        }
+        return true
     }
 
     return(
@@ -23,7 +57,7 @@ function NewHabit(props){
                 </Label>
                 <ActionButtons>
                 <ActionButton inputColor="gray" type="button" value="Cancelar" onClick={()=>newHabitCallback(false)}/>
-                <ActionButton  type="submit" value="Salvar" />
+                <ActionButton  type="submit" value="Salvar" disabled={loading}/>
                 </ActionButtons>
                 
             </Form>
@@ -67,7 +101,7 @@ justify-content: flex-end;
 `
 
 const ActionButton = styled.input`
-width; 50px;
+width: 50px;
 height: 35px;
 background-color: ${props => props.inputColor ||  "#EA4D3D"};
 color: white; 

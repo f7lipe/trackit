@@ -2,8 +2,11 @@ import Habit from "../Habit"
 import NewHabit from "../NewHabit"
 import styled from "styled-components"
 import { useState } from "react"
-function Habits() {
+
+function Habits(props) {
     const [newHabit, setNewHabit] = useState(false)
+    const {token} = props
+    
     return (
         <Main>
             <TitleLabel>
@@ -17,7 +20,7 @@ function Habits() {
         </ViewLabel>
         */}
 
-            {newHabit && <NewHabit newHabitCallback={setNewHabit}/>}
+            {newHabit && <NewHabit token={token} newHabitCallback={setNewHabit}/>}
             <Habit />
             <Habit />
             <Habit />
@@ -35,7 +38,7 @@ margin-bottom: 70px;
 const TitleLabel = styled.section`
 display: flex;
 justify-content: space-between; 
-alig-items: center;
+align-items: center;
 color: red;
 font-size: 23px; 
 height: 50px;
