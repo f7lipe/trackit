@@ -13,8 +13,8 @@ function Signup() {
     function signup(event){
         event.preventDefault()
         setLoading(true)
-        const SINGUP_API = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
-        const promise = axios.post(SINGUP_API,
+        const SIGNUP_API = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
+        const promise = axios.post(SIGNUP_API,
             {email: signupData.email,
             name: signupData.name,
             password: signupData.password,
