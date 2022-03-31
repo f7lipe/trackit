@@ -1,30 +1,19 @@
-import Footer from "../universal/Footer";
-import Habits from "../Habits";
-import History from "../History";
-import Login from "../Login";
-import Navbar from "../universal/Navbar";
-import Signup from "../Signup";
-import Today from "../Today";
 
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "../Login";
+import Signup from "../Signup";
+import TrackIt from "../TrackIt";
+
 
 function App(){
-
-    const [currentPage, setCurrentPage] = useState(0)
-
-    console.log(currentPage)
-
     return(
-
-        //<Login/>
-        //<Signup/>
-        <>
-        <Navbar/>
-            {currentPage === 0 && <Habits/>}
-            {currentPage === 1 && <Today/>}
-            {currentPage === 2 && <History/>}
-        <Footer switchPageCallback={setCurrentPage}/>
-        </>
+         <BrowserRouter>
+         <Routes>
+             <Route path="/" element={<Login/>} />
+             <Route path="/signup" element={<Signup/>} />
+             <Route path="/app"element={<TrackIt/>} />
+         </Routes>
+         </BrowserRouter>
     )
 }
 

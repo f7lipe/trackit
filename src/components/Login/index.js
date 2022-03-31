@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import Brand from "../universal/Logo"
 
+import { Link } from "react-router-dom";
+
 function Login() {
     return (
         <Main>
@@ -16,7 +18,9 @@ function Login() {
 
                 <EnterButton type="submit" value="Entrar" />
             </Form>
+            <Link to={"/signup"}>
             <SignupButton>Não tem uma conta? Cadastre-se</SignupButton>
+            </Link>
         </Main>
     )
 }
@@ -44,7 +48,7 @@ border: 1px #D4D4D4 solid;
 padding: 20px;
 `
 const EnterButton = styled.input`
-width; 80vw;
+width: 80vw;
 height: 45px;
 background-color: #EA4D3D;
 color: white; 
