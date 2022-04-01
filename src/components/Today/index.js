@@ -1,18 +1,52 @@
-import TodayCard from "../TodayCard"
+import TodayHabit from "../TodayCard"
 
 import styled from "styled-components"
+import dayjs from "dayjs"
+import moment from "moment"
+import 'moment/locale/pt-br' 
+import { useState, useEffect } from "react"
+import 'dayjs/locale/pt-br'
+import axios from "axios"
 
-function Today() {
+function Today(props) {
+
+    const {token} = props
+
+    const [habits, setHabits] = useState([])
+
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
+
+    function getHabits(){
+        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today"
+        const promise = axios.get(URL, config)
+        promise.then(response=>{
+            const data = response.data
+            setHabits(data)
+            console.log(data)
+        })
+    }
+    useEffect(getHabits,[]) //carrega na primeira inicialização
+    
+
     return <>
     <Main>
     <ViewLabel>
-           Seungda-feira, 24 de janeiro  
+           {moment().format('LL')} 
            <SubLabel>Nenhum hábito conclúido ainda</SubLabel>
         </ViewLabel>
-
-        <TodayCard/>
-        <TodayCard/>
-        <TodayCard/>
+     
+        {
+            habits.map(todayHabit => <TodayHabit 
+                key={todayHabit.id}
+                id={todayHabit.id} 
+                name={todayHabit.name} 
+                done={todayHabit.done} 
+                currentSequence={todayHabit.currentSequence}
+                highestSequence={todayHabit.highestSequence}
+                token={token}/>)
+        }
         
     </Main>
 

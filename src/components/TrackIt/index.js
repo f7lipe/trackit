@@ -18,7 +18,7 @@ function TrackIt(){
         <>
         <Navbar image={image}/>
             {currentPage === 0 && <Habits token={token}/>}
-            {currentPage === 1 && <Today/>}
+            {currentPage === 1 && <Today token={token}/>}
             {currentPage === 2 && <History/>}
         <Footer switchPageCallback={setCurrentPage}/>
         </>
