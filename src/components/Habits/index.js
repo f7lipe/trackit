@@ -40,7 +40,7 @@ function Habits(props) {
                 </ViewLabel>}
            
                 
-            {habits.map(habit => <Habit key={habit.id} name={habit.name} days={habit.days}/>)}
+            {habits.map(habit => <Habit key={habit.id} name={habit.name} id={habit.id} days={habit.days} token={token}/>)}
         </Main>
     )
 }

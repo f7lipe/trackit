@@ -56,8 +56,8 @@ function NewHabit(props){
                 <Weekdays isSelectable={true} callback={setSelectedDays}/>
                 </Label>
                 <ActionButtons>
-                <ActionButton inputColor="gray" type="button" value="Cancelar" onClick={()=>newHabitCallback(false)}/>
-                <ActionButton  type="submit" value="Salvar" disabled={loading}/>
+                <ActionButton inputColor="gray" type="button" value="Cancelar" onClick={()=>newHabitCallback(false)}>Cancelar</ActionButton>
+                <ActionButton  type="submit" value="Salvar" disabled={loading}>Salvar</ActionButton>
                 </ActionButtons>
                 
             </Form>
@@ -100,14 +100,17 @@ display: flex;
 justify-content: flex-end;
 `
 
-const ActionButton = styled.input`
-width: 50px;
+const ActionButton = styled.button`
+width: 70px;
 height: 35px;
 background-color: ${props => props.inputColor ||  "#EA4D3D"};
 color: white; 
 border: none;
 border-radius: 5px;
 margin-right: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
 `
 
 export default NewHabit
