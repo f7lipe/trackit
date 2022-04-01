@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 
 function Habit(props) {
-    const {name, id, days, token} = props
+    const {name, id, days, token, callback} = props
     const [deleting, setDeleting] = useState(false)
 
 
@@ -20,8 +20,8 @@ function Habit(props) {
         const promise = axios.delete(URL, config)
         promise.then((response)=>{
             console.log(response)
+            callback(true)
         })
-        console.log(id, config)
     }
 
     return (

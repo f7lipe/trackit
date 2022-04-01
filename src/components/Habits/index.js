@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 
 function Habits(props) {
+    const [reload, setReload] = useState(false)
     const [newHabit, setNewHabit] = useState(false)
     const [habits, setHabits] = useState([])
     const { token } = props
@@ -22,7 +23,7 @@ function Habits(props) {
             console.log(data)
         })
     }
-    useEffect(getHabits,[]) //carrega na primeira inicialização
+    useEffect(getHabits,[newHabit, reload]) //carrega na primeira inicialização
     
 
     return (
@@ -40,7 +41,7 @@ function Habits(props) {
                 </ViewLabel>}
            
                 
-            {habits.map(habit => <Habit key={habit.id} name={habit.name} id={habit.id} days={habit.days} token={token}/>)}
+            {habits.map(habit => <Habit callback={setReload} key={habit.id} name={habit.name} id={habit.id} days={habit.days} token={token}/>)}
         </Main>
     )
 }
