@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 
 function WeekDay(props){
-    const {day, selecting, isSelected, key_, isSelectable} = props
+    const {day, selecting, isSelected, key_, isSelectable, days} = props
     const [selected, setSelected] = useState(false) 
 
     function manageClick(selectedDay){
