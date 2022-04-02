@@ -33,6 +33,7 @@ function Login() {
             const contextValue = response.data //{id, name, image, email, password, token}
             setToken(contextValue.token)
             setImage(contextValue.image)
+            localStorage.setItem('token', contextValue.token)
             redirectUser("/app")
         })
         promise.catch(err =>{
