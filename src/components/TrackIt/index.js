@@ -11,16 +11,18 @@ import { useState, useContext } from "react";
 function TrackIt(){
 
     const [currentPage, setCurrentPage] = useState(0)
+    const [todayHabits, setTodayHabits] = useState(1)
+    const [finishedToday, setFinishedToday] = useState(0)
     const {token} = useContext(TokenContext)
     const {image} = useContext(ImageContext)
-    
+    console.log(todayHabits, finishedToday)
     return(
         <>
         <Navbar image={image}/>
             {currentPage === 0 && <Habits token={token}/>}
-            {currentPage === 1 && <Today token={token}/>}
+            {currentPage === 1 && <Today token={token} setTodayHabitsCallback={setTodayHabits} setFinishedHabitsCallback={setFinishedToday}/>}
             {currentPage === 2 && <History/>}
-        <Footer switchPageCallback={setCurrentPage}/>
+        <Footer switchPageCallback={setCurrentPage} todayHabits={todayHabits} finishedToday={finishedToday}/>
         </>
     )
 }

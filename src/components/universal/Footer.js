@@ -3,7 +3,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useState } from "react";
 function Footer(props){
-    const {switchPageCallback} = props
+    const {switchPageCallback, todayHabits, finishedToday} = props
 
     const [selectedPage, setSelectedPage] = useState(0)
     function switchPage(pageIndex){
@@ -15,11 +15,11 @@ function Footer(props){
     return(
         <ToolBar>
             <Item onClick={()=>switchPage(0)} selected={selectedPage === 0}>Hábitos</Item>
-            <ProgressBar onClick={()=>switchPage(1)}>
-            <CircularProgressbar value={60} text={`${'Hoje'}`} background         styles={buildStyles({
-          backgroundColor: `${selectedPage === 1 ? `rgb(234, 77, 61)` : `rgb(247, 247, 247)`} `,
-          textColor:  `${selectedPage === 1 ? `white` : `#FF3B30`} `,
-          pathColor: `${selectedPage === 1 ? `white` : `#FF3B30`} `,
+            <ProgressBar onClick={()=>switchPage(1)} hasHabits={false}>
+            <CircularProgressbar value={todayHabits === 0 ? 100 : (finishedToday/todayHabits)*100} text={`${'Hoje'}`} background         styles={buildStyles({
+          backgroundColor: `rgb(247, 247, 247)`,
+          textColor:  `${selectedPage === 1 ? `#FF3B30` : `gray`} `,
+          pathColor: `${selectedPage === 1 ? `#FF3B30` : `gray`} `,
           trailColor: "transparent"
         })} />
             </ProgressBar>
@@ -50,8 +50,8 @@ color: ${props => props.selected ? `rgb(234, 77, 61)` : `gray`};
 `
 const ProgressBar = styled.div`
 width: 90px;
-height; 90px;
-margin-bottom: 50px;
+height: 90px;
+margin-bottom: ${props => props.hasHabits ? '50px' : '50px'};
 `
 
 export default Footer

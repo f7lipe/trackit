@@ -3,7 +3,7 @@ import { useState } from "react"
 import styled from "styled-components"
 
 function TodayHabit(props) {
-    const {id, name, done, currentSequence, highestSequence, token} = props
+    const {id, name, done, currentSequence, highestSequence, token, setDoneCallback, callback} = props
     const [isSelected, setSelected] = useState(done)
 
     function manageSelection(){
@@ -13,21 +13,21 @@ function TodayHabit(props) {
         }
         
         if(isSelected){
-            uncheck(URL, config)
+            toggleCheck(URL, config)   
         } else {
-            chek(URL, config)
+            toggleCheck(URL, config)
         }
     }
 
-    function chek(URL, config){
+    function toggleCheck(URL, config){
         const promise = axios.post(URL, undefined,config)
-        promise.then(()=>  setSelected(true))
+        promise.then(()=> {
+            setSelected(!isSelected)
+        callback(Math.random())
+        } )
     }
 
-    function uncheck(URL, config){
-       const promise = axios.post(URL, undefined, config)
-       promise.then(()=>  setSelected(false))
-    }
+
 
     return (
         <Card onClick={()=> manageSelection()}>
@@ -36,8 +36,8 @@ function TodayHabit(props) {
                     <Title>{name}</Title>
                 </CardHeader>
 
-                <Status>Sequência atual: {currentSequence} dias</Status>
-                <Status>Seu recorde: {highestSequence} dias</Status>
+                <Status higlight={done}>Sequência atual: {currentSequence} dias</Status>
+                <Status higlight={highestSequence>0 && highestSequence === currentSequence}>Seu recorde: {highestSequence} dias</Status>
 
             </Container>
             <CheckMark selected={isSelected || done}  width="69" height="69" viewBox="0 0 69 69" xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +75,7 @@ color: gray;
 const Status = styled.h4`
 font-size: 15px;
 font-weight: 500px;
-color: gray;
+color:  ${props => props.higlight ? `green` : `gray`};
 margin-bottom: 7px;
 `
 

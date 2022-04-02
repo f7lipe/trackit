@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 
 function Habits(props) {
-    const [reload, setReload] = useState(false)
+    const [reload, setReload] = useState(0)
     const [newHabit, setNewHabit] = useState(false)
     const [habits, setHabits] = useState([])
     const { token } = props

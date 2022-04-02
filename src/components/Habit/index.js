@@ -19,8 +19,7 @@ function Habit(props) {
         const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`
         const promise = axios.delete(URL, config)
         promise.then((response)=>{
-            console.log(response)
-            callback(true)
+            callback(Math.random())
         })
     }
 

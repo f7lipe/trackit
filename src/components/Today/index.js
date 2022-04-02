@@ -10,10 +10,10 @@ import axios from "axios"
 
 function Today(props) {
 
-    const {token} = props
+    const {token, setTodayHabitsCallback, setFinishedHabitsCallback} = props
 
     const [habits, setHabits] = useState([])
-
+    const [update, setUpdate] = useState(0)
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     }
@@ -24,17 +24,30 @@ function Today(props) {
         promise.then(response=>{
             const data = response.data
             setHabits(data)
-            console.log(data)
+            setTodayHabitsCallback(data.length)
+            countDone(data)
         })
     }
-    useEffect(getHabits,[]) //carrega na primeira inicialização
+
+    
+    function countDone(habits){
+       let done = 0 
+        for(let habit of habits){
+            if(habit.done){
+                done++
+            }
+        }
+        setFinishedHabitsCallback(done)
+        return done
+    }
+    useEffect(getHabits,[update]) //carrega na primeira inicialização
     
 
     return <>
     <Main>
     <ViewLabel>
            {moment().format('LL')} 
-           <SubLabel>Nenhum hábito conclúido ainda</SubLabel>
+           <SubLabel>{countDone(habits) === 0 ? 'Nenhum hábito concluído ainda' : `Você concluiu ${(countDone(habits)/habits.length)*100}% dos seus hábitos pra hoje`}</SubLabel>
         </ViewLabel>
      
         {
@@ -45,7 +58,8 @@ function Today(props) {
                 done={todayHabit.done} 
                 currentSequence={todayHabit.currentSequence}
                 highestSequence={todayHabit.highestSequence}
-                token={token}/>)
+                token={token}
+                callback={setUpdate}/>)
         }
         
     </Main>
