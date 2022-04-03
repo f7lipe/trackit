@@ -9,7 +9,8 @@ function Habits({ token }) {
     const [update, setUpdate] = useState(['no']) //será atualizado em Habit
     const [isAddingNewHabit, setIsAddingNewHabit] = useState(false) //será atualizado também em NewHabit
     const [habits, setHabits] = useState([])
-
+  
+    
     function getHabits(){
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
         const headers = config(token)
@@ -20,7 +21,7 @@ function Habits({ token }) {
         })
     }
 
-    useEffect(getHabits,[isAddingNewHabit, update]) //renderiza novamente se houver alterações em isAddingNewHabit, update
+    useEffect(getHabits,[isAddingNewHabit, update, token]) //renderiza novamente se houver alterações em isAddingNewHabit, update
     
 
     return (

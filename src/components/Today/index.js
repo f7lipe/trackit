@@ -24,7 +24,7 @@ function Today({ token, progress }) {
         })
     }
 
-    useEffect(getHabits, [update]) //renderiza novamente se houver alterações em update
+    useEffect(getHabits, [update, progress, token]) //renderiza novamente se houver alterações em update
 
     const doneHabits = countDone(habits)
     const percentProgress = evaluateProgess(doneHabits, habits.length)
@@ -70,7 +70,7 @@ font-size: 18px;
 font-weight: 700;
 margin-bottom: 20px;
 `
-const SubLabel = styled.h2`
+const SubLabel = styled.p`
 color: gray;
 font-size: 16px;
 font-weight: 500;

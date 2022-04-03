@@ -9,8 +9,8 @@ import { useState, useContext } from "react"
 
 function Login() {
 
-    const {token, setToken} = useContext(TokenContext)
-    const {image, setImage} = useContext(ImageContext)
+    const { setToken } = useContext(TokenContext)
+    const { setImage } = useContext(ImageContext)
     
     const [signinData, setSigninData] = useState({email:'', password:''})
     const [loading, setLoading] = useState(false)

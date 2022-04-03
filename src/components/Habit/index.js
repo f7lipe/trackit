@@ -1,8 +1,7 @@
-import Weekdays from "../universal/Weekdays";
+import axios from "axios";
 import styled from "styled-components";
 import { useState } from "react";
-import axios from "axios";
-import config from "../../functions/config";
+import Weekdays from "../universal/Weekdays";
 
 function Habit(props) {
     const { name, id, days, token, update } = props
@@ -48,7 +47,7 @@ function Habit(props) {
                         6V12C8.5 12.1326 8.55268 12.2598 8.64645 12.3536C8.74021 12.4473 8.86739 12.5 9 12.5C9.13261 12.5 
                         9.25979 12.4473 9.35355 12.3536C9.44732 12.2598 9.5 12.1326 9.5 12V6Z"
                             fill="#666666" />
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13 3C13 3.26522 12.8946 3.51957 12.7071 
+                        <path fillRule="evenodd" clipRule="evenodd" d="M13 3C13 3.26522 12.8946 3.51957 12.7071 
                         3.70711C12.5196 3.89464 12.2652 4 12 4H11.5V13C11.5 13.5304 11.2893 14.0391 10.9142 14.4142C10.5391 
                         14.7893 10.0304 15 9.5 15H3.5C2.96957 15 2.46086 14.7893 2.08579 14.4142C1.71071 14.0391 1.5 13.5304 
                         1.5 13V4H1C0.734784 4 0.48043 3.89464 0.292893 3.70711C0.105357 3.51957 0 3.26522 0 3V2C0 1.73478 

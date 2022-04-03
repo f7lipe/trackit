@@ -53,6 +53,7 @@ const Item = styled.p`
 font-family: 'Recursive', sans-serif;
 font-style: normal;
 font-size: medium;
+width: 80px;
 font-weight:  ${props => props.selected ? `800` : `400`};
 color: ${props => props.selected ? `rgb(234, 77, 61)` : `gray`};
 `
