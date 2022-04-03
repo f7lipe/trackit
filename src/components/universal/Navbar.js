@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 
 function Navbar(props) {
-    const { image } = props
+    const { profilePicture } = props
     return (
 
         <Header>
             <Logo>TrackIt</Logo>
             <ProfPic>
-               <Image src={image}/>
+               <Image src={profilePicture}/>
             </ProfPic>
         </Header>
 

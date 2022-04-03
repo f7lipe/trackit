@@ -30,7 +30,7 @@ function Weekdays(props) {
         <Days>
             {
                 Object.values(weekdays).map((day, index) => {
-                    return <WeekDay isSelected={typeof days === 'undefined' ? false : days.includes(index)} day={day} selecting={(key_) => toggleSelection(key_)} key_={index} isSelectable={isSelectable} days={days}/>
+                    return <WeekDay key={index} isSelected={typeof days === 'undefined' ? false : days.includes(index)} day={day} selecting={(key_) => toggleSelection(key_)} key_={index} isSelectable={isSelectable} days={days}/>
                 })
             }
         </Days>

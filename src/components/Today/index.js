@@ -1,68 +1,57 @@
+import config from "../../functions/config"
+import countDone from "../../functions/countDone"
+import evaluateProgess from "../../functions/evaluateProgress"
+import get from "../../functions/get"
+import moment from "moment"
+import 'moment/locale/pt-br'
+import styled from "styled-components"
+import { useState, useEffect } from "react"
 import TodayHabit from "../TodayCard"
 
-import styled from "styled-components"
-import dayjs from "dayjs"
-import moment from "moment"
-import 'moment/locale/pt-br' 
-import { useState, useEffect } from "react"
-import 'dayjs/locale/pt-br'
-import axios from "axios"
-
-function Today(props) {
-
-    const {token, setTodayHabitsCallback, setFinishedHabitsCallback} = props
+function Today({ token, progress }) {
 
     const [habits, setHabits] = useState([])
-    const [update, setUpdate] = useState(0)
-    const config = {
-        headers: { Authorization: `Bearer ${token}` }
-    }
+    const [update, setUpdate] = useState(['no']) 
 
-    function getHabits(){
+    function getHabits() {
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today"
-        const promise = axios.get(URL, config)
-        promise.then(response=>{
-            const data = response.data
-            setHabits(data)
-            setTodayHabitsCallback(data.length)
-            countDone(data)
+        const configHeaders = config(token)
+        const promise = get(URL, configHeaders)
+        promise.then(response => {
+            const habitsData = response.data
+            setHabits(habitsData)
+            progress({ today: habitsData.length, done: countDone(habitsData) })
         })
     }
 
-    
-    function countDone(habits){
-       let done = 0 
-        for(let habit of habits){
-            if(habit.done){
-                done++
-            }
-        }
-        setFinishedHabitsCallback(done)
-        return done
-    }
-    useEffect(getHabits,[update]) //carrega na primeira inicialização
-    
+    useEffect(getHabits, [update]) //carrega se houver alterações em update
+
+    const doneHabits = countDone(habits)
+    const percentProgress = evaluateProgess(doneHabits, habits.length)
+    const currentDate = moment().format('LL')
 
     return <>
-    <Main>
-    <ViewLabel>
-           {moment().format('LL')} 
-           <SubLabel>{countDone(habits) === 0 ? 'Nenhum hábito concluído ainda' : `Você concluiu ${(countDone(habits)/habits.length)*100}% dos seus hábitos pra hoje`}</SubLabel>
-        </ViewLabel>
-     
-        {
-            habits.map(todayHabit => <TodayHabit 
-                key={todayHabit.id}
-                id={todayHabit.id} 
-                name={todayHabit.name} 
-                done={todayHabit.done} 
-                currentSequence={todayHabit.currentSequence}
-                highestSequence={todayHabit.highestSequence}
-                token={token}
-                callback={setUpdate}/>)
-        }
-        
-    </Main>
+        <Main>
+            <ViewLabel>
+                {currentDate}
+                <SubLabel>{doneHabits === 0 ? 'Nenhum hábito concluído ainda' :
+                    `Você concluiu ${percentProgress}% dos seus hábitos pra hoje`}
+                </SubLabel>
+            </ViewLabel>
+
+            {
+                habits.map(todayHabit => <TodayHabit
+                    key={todayHabit.id}
+                    id={todayHabit.id}
+                    name={todayHabit.name}
+                    done={todayHabit.done}
+                    currentSequence={todayHabit.currentSequence}
+                    highestSequence={todayHabit.highestSequence}
+                    token={token}
+                    update={setUpdate} />)
+            }
+
+        </Main>
 
     </>
 }

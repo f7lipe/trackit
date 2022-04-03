@@ -3,7 +3,8 @@ import { useState } from "react"
 import styled from "styled-components"
 
 function TodayHabit(props) {
-    const {id, name, done, currentSequence, highestSequence, token, setDoneCallback, callback} = props
+    const {id, name, done, currentSequence, highestSequence, token, update} = props
+    
     const [isSelected, setSelected] = useState(done)
 
     function manageSelection(){
@@ -23,7 +24,7 @@ function TodayHabit(props) {
         const promise = axios.post(URL, undefined,config)
         promise.then(()=> {
             setSelected(!isSelected)
-        callback(Math.random())
+            update(['yes'])
         } )
     }
 

@@ -1,9 +1,8 @@
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Login from "../Login";
 import Signup from "../Signup";
 import TrackIt from "../TrackIt";
+import { useState } from "react";
 
 import TokenContext from "../../contexts/TokenContext";
 import ImageContext from "../../contexts/ImageContext";
@@ -11,6 +10,7 @@ import ImageContext from "../../contexts/ImageContext";
 function App() {
     const [token, setToken] = useState(localStorage.getItem('token'))
     const [image, setImage] = useState('')
+
 
     return (
         <TokenContext.Provider value={{ token, setToken }}>

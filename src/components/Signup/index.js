@@ -1,30 +1,26 @@
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import styled from "styled-components"
 import Brand from "../universal/Logo"
+import { Link, useNavigate } from "react-router-dom";
+import post from "../../functions/post";
+import styled from "styled-components"
 import { ThreeDots } from "react-loader-spinner";
+import { useState } from "react";
 
 function Signup() {
 
     const [signupData, setSignupData] = useState({email:'', name:'', image:'', password:'', photoUrl:''})
     const [loading, setLoading] = useState(false)
     let redirectUser = useNavigate()
+    
     function signup(event){
         event.preventDefault()
         setLoading(true)
-        const SIGNUP_API = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
-        const promise = axios.post(SIGNUP_API,
-            {email: signupData.email,
-            name: signupData.name,
-            password: signupData.password,
-            image: signupData.photoUrl}
-            )
-
-        promise.then((response)=>{
-            redirectUser("/")
-        })
-
+        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
+        const credentials = {email: signupData.email, 
+                            name: signupData.name, 
+                            password: signupData.password, 
+                            image: signupData.photoUrl}
+        const promise = post(URL, credentials)
+        promise.then(()=>redirectUser("/"))
         promise.catch(err =>{
             alert(err.response.statusText)
             setLoading(false)

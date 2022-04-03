@@ -1,15 +1,11 @@
-import axios from "axios";
-import styled from "styled-components"
 import Brand from "../universal/Logo"
-
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react"
-import TokenContext from "../../contexts/TokenContext";
 import ImageContext from "../../contexts/ImageContext";
-import { useContext } from "react";
-
-
+import { Link, useNavigate } from "react-router-dom";
+import post from "../../functions/post";
+import styled from "styled-components"
 import { ThreeDots } from "react-loader-spinner";
+import TokenContext from "../../contexts/TokenContext";
+import { useState, useContext } from "react"
 
 function Login() {
 
@@ -24,11 +20,8 @@ function Login() {
         event.preventDefault()
         setLoading(true)
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
-        const promise = axios.post(URL,
-            {
-                email: signinData.email, 
-                password: signinData.password
-            })
+        const credentials = {email: signinData.email, password: signinData.password}
+        const promise = post(URL, credentials)
         promise.then(response => {
             const contextValue = response.data //{id, name, image, email, password, token}
             setToken(contextValue.token)

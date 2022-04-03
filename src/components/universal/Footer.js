@@ -2,28 +2,36 @@ import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useState } from "react";
-function Footer(props){
-    const {switchPageCallback, todayHabits, finishedToday} = props
+import evaluateProgess from "../../functions/evaluateProgress";
+function Footer(props) {
+    const { currentPage, progress } = props
 
-    const [selectedPage, setSelectedPage] = useState(0)
-    function switchPage(pageIndex){
-        switchPageCallback(pageIndex)
+    const [selectedPage, setSelectedPage] = useState(1)
+    function switchPage(pageIndex) {
+        currentPage(pageIndex)
         setSelectedPage(pageIndex)
     }
 
-
-    return(
+    const percentProgress = evaluateProgess(progress.done, progress.today)
+    
+    return (
         <ToolBar>
-            <Item onClick={()=>switchPage(0)} selected={selectedPage === 0}>Hábitos</Item>
-            <ProgressBar onClick={()=>switchPage(1)} hasHabits={false}>
-            <CircularProgressbar value={todayHabits === 0 ? 100 : (finishedToday/todayHabits)*100} text={`${'Hoje'}`} background         styles={buildStyles({
-          backgroundColor: `rgb(247, 247, 247)`,
-          textColor:  `${selectedPage === 1 ? `#FF3B30` : `gray`} `,
-          pathColor: `${selectedPage === 1 ? `#FF3B30` : `gray`} `,
-          trailColor: "transparent"
-        })} />
+            <Item onClick={() => switchPage(0)} selected={selectedPage === 0}>Hábitos</Item>
+
+            <ProgressBar onClick={() => switchPage(1)} hasHabits={false}>
+                <CircularProgressbar strokeWidth={4}
+                    value={percentProgress}
+                    text={`Hoje`}
+                    background={true}
+                    styles={buildStyles({
+                        backgroundColor: `rgb(247, 247, 247)`,
+                        textColor: `${selectedPage === 1 ? `#FF3B30` : `gray`} `,
+                        pathColor: `${selectedPage === 1 ? `#FF3B30` : `gray`} `,
+                        trailColor: "transparent"
+                    })} />
             </ProgressBar>
-           <Item onClick={()=>switchPage(2)} selected={selectedPage === 2}>Histórico</Item> 
+
+            <Item onClick={() => switchPage(2)} selected={selectedPage === 2}>Histórico</Item>
         </ToolBar>
     )
 }

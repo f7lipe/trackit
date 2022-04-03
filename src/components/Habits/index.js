@@ -1,39 +1,36 @@
+import config from "../../functions/config"
+import get from "../../functions/get"
 import Habit from "../Habit"
 import NewHabit from "../NewHabit"
 import styled from "styled-components"
 import { useState, useEffect } from "react"
-import axios from "axios"
 
 function Habits(props) {
     const [reload, setReload] = useState(0)
-    const [newHabit, setNewHabit] = useState(false)
+    const [isAddingNewHabit, setIsAddingNewHabit] = useState(false)
     const [habits, setHabits] = useState([])
     const { token } = props
 
-    const config = {
-        headers: { Authorization: `Bearer ${token}` }
-    }
-
     function getHabits(){
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
-        const promise = axios.get(URL, config)
+        const headers = config(token)
+        const promise = get(URL, headers)
         promise.then(response=>{
             const data = response.data
             setHabits(data)
-            console.log(data)
         })
     }
-    useEffect(getHabits,[newHabit, reload]) //carrega na primeira inicialização
+    useEffect(getHabits,[isAddingNewHabit, reload]) //carrega na primeira inicialização
     
 
     return (
         <Main>
             <TitleLabel>
                 <h1>Meus hábitos</h1>
-                <AddButton onClick={() => setNewHabit(true)}>+</AddButton>
+                <AddButton onClick={() => setIsAddingNewHabit(true)}>+</AddButton>
             </TitleLabel>
 
-            {newHabit && <NewHabit token={token} newHabitCallback={setNewHabit} />}
+            {isAddingNewHabit && <NewHabit token={token} newHabitCallback={setIsAddingNewHabit} />}
 
             {habits.length === 0 &&
                 <ViewLabel>
@@ -41,7 +38,12 @@ function Habits(props) {
                 </ViewLabel>}
            
                 
-            {habits.map(habit => <Habit callback={setReload} key={habit.id} name={habit.name} id={habit.id} days={habit.days} token={token}/>)}
+            {habits.map(habit => <Habit callback={setReload} 
+                                        key={habit.id} 
+                                        name={habit.name} 
+                                        id={habit.id} 
+                                        days={habit.days}
+                                        token={token}/>)}
         </Main>
     )
 }
