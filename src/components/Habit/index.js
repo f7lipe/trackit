@@ -1,13 +1,16 @@
 import axios from "axios";
 import styled from "styled-components";
+import { ThreeDots } from "react-loader-spinner";
 import { useState } from "react";
 import Weekdays from "../universal/Weekdays";
 
 function Habit(props) {
     const { name, id, days, token, update } = props
     const [deleting, setDeleting] = useState(false)
+    const [deletingAnimation, setDeletingAnimation] = useState(false)
 
     function deleteHabit() {
+        setDeletingAnimation(true)
         const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`
         const config = {
             data: { id: id, name: name, days: days },
@@ -29,7 +32,7 @@ function Habit(props) {
                     </ActionButton>
                     <ActionButton inputColor={"orange"}
                         onClick={() => deleteHabit()}>
-                        Confirmar
+                         {deletingAnimation ? <ThreeDots color="white" height={15} width={15}/> : "Confirmar"}
                     </ActionButton>
                 </ActionGroup>
                 
