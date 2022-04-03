@@ -11,12 +11,12 @@ import TodayHabit from "../TodayCard"
 function Today({ token, progress }) {
 
     const [habits, setHabits] = useState([])
-    const [update, setUpdate] = useState(['no']) 
+    const [update, setUpdate] = useState(['no']) //terá o valor alterado via callback em TodayHabit
 
     function getHabits() {
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today"
-        const configHeaders = config(token)
-        const promise = get(URL, configHeaders)
+        const headers = config(token)
+        const promise = get(URL, headers)
         promise.then(response => {
             const habitsData = response.data
             setHabits(habitsData)
@@ -24,7 +24,7 @@ function Today({ token, progress }) {
         })
     }
 
-    useEffect(getHabits, [update]) //carrega se houver alterações em update
+    useEffect(getHabits, [update]) //renderiza novamente se houver alterações em update
 
     const doneHabits = countDone(habits)
     const percentProgress = evaluateProgess(doneHabits, habits.length)
@@ -35,7 +35,7 @@ function Today({ token, progress }) {
             <ViewLabel>
                 {currentDate}
                 <SubLabel>{doneHabits === 0 ? 'Nenhum hábito concluído ainda' :
-                    `Você concluiu ${percentProgress}% dos seus hábitos pra hoje`}
+                    `Você concluiu ${percentProgress}% dos seus hábitos hoje`}
                 </SubLabel>
             </ViewLabel>
 
@@ -48,7 +48,8 @@ function Today({ token, progress }) {
                     currentSequence={todayHabit.currentSequence}
                     highestSequence={todayHabit.highestSequence}
                     token={token}
-                    update={setUpdate} />)
+                    update={setUpdate} 
+                    />)
             }
 
         </Main>

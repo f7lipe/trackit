@@ -1,65 +1,68 @@
-import Weekdays from "../universal/Weekdays";
+import config from "../../functions/config";
+import post from "../../functions/post"
 import styled from "styled-components";
+import { ThreeDots } from "react-loader-spinner";
 import { useState } from "react";
-import axios from "axios";
+import Weekdays from "../universal/Weekdays";
 
-function NewHabit(props){
+function NewHabit({ addingNewHabit, token }) {
 
-    const {newHabitCallback, token} = props
     const [habitName, setHabitName] = useState("")
-    const [selectedDays, setSelectedDays] = useState([])
+    const [selectedDays, setSelectedDays] = useState([]) //será atualizado em Weekdays
     const [loading, setLoading] = useState(false)
-    
-    function submit(event){
-        
+
+    function addNewHabit(event) {
+
         event.preventDefault()
 
-        if(verify()){
+        if (verifySelectedDays(selectedDays)) {
             setLoading(true)
             const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            }
-            
-            const bodyParameters = {
-                name: habitName, 
-                days: selectedDays
-             }
-    
-            const promise =  axios.post(URL, bodyParameters, config)
-            promise.then(response =>{
-                newHabitCallback(false) //altera o estado de NewHabit
-            }) 
-            promise.catch(err =>{
+            const data = { name: habitName, days: selectedDays }
+            const headers = config(token)
+            const promise = post(URL, data, headers)
+            promise.then(() => { addingNewHabit(false) }) //altera isAddingNewHabit em NewHabit
+            promise.catch(err => {
                 alert(`Houve uma falha ao cadastrar seu hábito.\n Resposta do servidor: ${err.response.statusText}`)
                 setLoading(false)
             })
-    
         }
     }
 
-    function verify(){
-        if (selectedDays.length === 0){
-            alert("Selecione pelo menos um dia da semana") 
+    function verifySelectedDays(selected) {
+        if (selected.length === 0) {
+            alert("Selecione pelo menos um dia da semana")
             return false
         }
         return true
     }
 
-    return(
-        <NewHabitCard>   
-            <Form onSubmit={submit}>
+    return (
+        <NewHabitCard>
+            <Form onSubmit={addNewHabit}>
                 <Label>
-                    <Input type="text" name="habit" placeholder="nome do hábito" value={habitName} onChange={(e) => setHabitName(e.target.value)} required />
+                    <Input type="text"
+                        name="habit"
+                        placeholder="nome do hábito"
+                        value={habitName}
+                        onChange={(e) => setHabitName(e.target.value)}
+                        required />
                 </Label>
                 <Label>
-                <Weekdays isSelectable={true} callback={setSelectedDays}/>
+                    <Weekdays isSelectable={true}
+                        callback={setSelectedDays} />
                 </Label>
                 <ActionButtons>
-                <ActionButton inputColor="gray" type="button" value="Cancelar" onClick={()=>newHabitCallback(false)}>Cancelar</ActionButton>
-                <ActionButton  type="submit" value="Salvar" disabled={loading}>Salvar</ActionButton>
+                    <ActionButton inputColor="gray"
+                        type="button"
+                        onClick={() => addingNewHabit(false) /* atualiza isAddingNewHabit em Habits */}> 
+                        Cancelar
+                    </ActionButton>
+                    <ActionButton type="submit" 
+                                  disabled={loading}>
+                        {loading ? <ThreeDots color="white" height={30} width={30} /> : "Salvar"}
+                    </ActionButton>
                 </ActionButtons>
-                
             </Form>
         </NewHabitCard>
     )
@@ -78,7 +81,6 @@ background-color: white;
 box-shadow: 0px 2px 4px rgba(10, 10, 10, 0.30);
 margin-bottom: 60px;
 `
-
 const Form = styled.form`
 width: 80vw;
 display: flex;
@@ -94,16 +96,14 @@ border-radius: 5px;
 border: 1px #D4D4D4 solid;
 padding: 20px;
 `
-
 const ActionButtons = styled.section`
 display: flex;
 justify-content: flex-end;
 `
-
 const ActionButton = styled.button`
 width: 70px;
 height: 35px;
-background-color: ${props => props.inputColor ||  "#EA4D3D"};
+background-color: ${props => props.inputColor || "#EA4D3D"};
 color: white; 
 border: none;
 border-radius: 5px;

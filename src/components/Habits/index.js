@@ -5,11 +5,10 @@ import NewHabit from "../NewHabit"
 import styled from "styled-components"
 import { useState, useEffect } from "react"
 
-function Habits(props) {
-    const [reload, setReload] = useState(0)
-    const [isAddingNewHabit, setIsAddingNewHabit] = useState(false)
+function Habits({ token }) {
+    const [update, setUpdate] = useState(['no']) //será atualizado em Habit
+    const [isAddingNewHabit, setIsAddingNewHabit] = useState(false) //será atualizado também em NewHabit
     const [habits, setHabits] = useState([])
-    const { token } = props
 
     function getHabits(){
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
@@ -20,7 +19,8 @@ function Habits(props) {
             setHabits(data)
         })
     }
-    useEffect(getHabits,[isAddingNewHabit, reload]) //carrega na primeira inicialização
+
+    useEffect(getHabits,[isAddingNewHabit, update]) //renderiza novamente se houver alterações em isAddingNewHabit, update
     
 
     return (
@@ -30,7 +30,7 @@ function Habits(props) {
                 <AddButton onClick={() => setIsAddingNewHabit(true)}>+</AddButton>
             </TitleLabel>
 
-            {isAddingNewHabit && <NewHabit token={token} newHabitCallback={setIsAddingNewHabit} />}
+            {isAddingNewHabit && <NewHabit token={token} addingNewHabit={setIsAddingNewHabit} />}
 
             {habits.length === 0 &&
                 <ViewLabel>
@@ -38,12 +38,13 @@ function Habits(props) {
                 </ViewLabel>}
            
                 
-            {habits.map(habit => <Habit callback={setReload} 
+            {habits.map(habit => <Habit update={setUpdate} 
                                         key={habit.id} 
                                         name={habit.name} 
                                         id={habit.id} 
                                         days={habit.days}
-                                        token={token}/>)}
+                                        token={token}
+                                        />)}
         </Main>
     )
 }

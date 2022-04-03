@@ -1,7 +1,7 @@
 import axios from "axios";
 
-function post(URL, configs = undefined, data){
-    return axios.post(URL, configs, data)
+function post(URL, data = undefined, configs){
+    return axios.post(URL, data, configs)
 }
 
 export default post
