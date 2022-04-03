@@ -9,7 +9,7 @@ import ImageContext from "../../contexts/ImageContext";
 
 function App() {
     const [token, setToken] = useState(localStorage.getItem('token'))
-    const [image, setImage] = useState('')
+    const [image, setImage] =  useState(localStorage.getItem('profPic'))
 
 
     return (

@@ -27,6 +27,7 @@ function Login() {
             setToken(contextValue.token)
             setImage(contextValue.image)
             localStorage.setItem('token', contextValue.token)
+            localStorage.setItem('profPic', contextValue.image)
             redirectUser("/app")
         })
         promise.catch(err =>{
