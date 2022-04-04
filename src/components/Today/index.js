@@ -1,30 +1,14 @@
-import config from "../../functions/config"
 import countDone from "../../functions/countDone"
 import evaluateProgess from "../../functions/evaluateProgress"
-import get from "../../functions/get"
 import moment from "moment"
 import 'moment/locale/pt-br'
 import styled from "styled-components"
 import { useState, useEffect } from "react"
 import TodayHabit from "../TodayCard"
 
-function Today({ token, progress }) {
-
-    const [habits, setHabits] = useState([])
+function Today({ token, habits }) {
+    
     const [update, setUpdate] = useState(['no']) //terá o valor alterado via callback em TodayHabit
-
-    function getHabits() {
-        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today"
-        const headers = config(token)
-        const promise = get(URL, headers)
-        promise.then(response => {
-            const habitsData = response.data
-            setHabits(habitsData)
-            progress({ today: habitsData.length, done: countDone(habitsData) })
-        })
-    }
-
-    useEffect(getHabits, [update, progress, token]) //renderiza novamente se houver alterações em update
 
     const doneHabits = countDone(habits)
     const percentProgress = evaluateProgess(doneHabits, habits.length)

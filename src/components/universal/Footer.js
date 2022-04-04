@@ -18,7 +18,7 @@ function Footer(props) {
         <ToolBar>
             <Item onClick={() => switchPage(0)} selected={selectedPage === 0}>Hábitos</Item>
 
-            <ProgressBar onClick={() => switchPage(1)} hasHabits={false}>
+            <ProgressBar onClick={() => switchPage(1)} hasHabits={percentProgress > 0 }>
                 <CircularProgressbar strokeWidth={4}
                     value={percentProgress}
                     text={`Hoje`}
@@ -60,7 +60,7 @@ color: ${props => props.selected ? `rgb(234, 77, 61)` : `gray`};
 const ProgressBar = styled.div`
 width: 90px;
 height: 90px;
-margin-bottom: ${props => props.hasHabits ? '50px' : '50px'};
+margin-bottom: ${props => props.hasHabits ? '50px' : '0'};
 `
 
 export default Footer

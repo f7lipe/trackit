@@ -5,7 +5,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { useState } from "react";
 import Weekdays from "../universal/Weekdays";
 
-function NewHabit({ addingNewHabit, token }) {
+function NewHabit({ addingNewHabit, isAddingNewHabit, token }) {
 
     const [habitName, setHabitName] = useState("")
     const [selectedDays, setSelectedDays] = useState([]) //será atualizado em Weekdays
@@ -21,7 +21,11 @@ function NewHabit({ addingNewHabit, token }) {
             const data = { name: habitName, days: selectedDays }
             const headers = config(token)
             const promise = post(URL, data, headers)
-            promise.then(() => { addingNewHabit(false) }) //altera isAddingNewHabit em NewHabit
+            promise.then(() => { 
+                setHabitName("")
+                addingNewHabit(false) //altera isAddingNewHabit em NewHabit
+                setLoading(false)
+            }) 
             promise.catch(err => {
                 alert(`Houve uma falha ao cadastrar seu hábito.\n Resposta do servidor: ${err.response.statusText}`)
                 setLoading(false)
@@ -38,7 +42,7 @@ function NewHabit({ addingNewHabit, token }) {
     }
 
     return (
-        <NewHabitCard>
+        <NewHabitCard isVisible={isAddingNewHabit}>
             <Form onSubmit={addNewHabit}>
                 <Label>
                     <Input type="text"
@@ -69,7 +73,7 @@ function NewHabit({ addingNewHabit, token }) {
 }
 
 const NewHabitCard = styled.section` 
-display: flex;
+display: ${props =>props.isVisible ? 'flex' : 'none'};
 flex-direction: column;
 align-items: center;
 justify-content: center;

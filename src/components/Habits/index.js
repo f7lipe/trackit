@@ -31,7 +31,7 @@ function Habits({ token }) {
                 <AddButton onClick={() => setIsAddingNewHabit(true)}>+</AddButton>
             </TitleLabel>
 
-            {isAddingNewHabit && <NewHabit token={token} addingNewHabit={setIsAddingNewHabit} />}
+             <NewHabit token={token} addingNewHabit={setIsAddingNewHabit} isAddingNewHabit={isAddingNewHabit} update={setUpdate} />
 
             {habits.length === 0 &&
                 <ViewLabel>
