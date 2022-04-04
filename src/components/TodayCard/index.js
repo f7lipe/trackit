@@ -19,6 +19,7 @@ function TodayHabit(props) {
         const promise = post(URL, undefined, config)
         promise.then(() => {
             setSelected(!isSelected)
+            update(['yes']) //atualiza update em Today
         })
     }
 

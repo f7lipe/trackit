@@ -5,7 +5,7 @@ import { useState } from "react";
 import Weekdays from "../universal/Weekdays";
 
 function Habit(props) {
-    const { name, id, days, token, update } = props
+    const { name, id, days, token, update, updateAll } = props
     const [deleting, setDeleting] = useState(false)
     const [deletingAnimation, setDeletingAnimation] = useState(false)
 
@@ -17,7 +17,10 @@ function Habit(props) {
             headers: { Authorization: `Bearer ${token}` }
         }
         const promise = axios.delete(URL, config)
-        promise.then(() => { update(['yes']) }) //atualiza update em Habits
+        promise.then(() => { 
+            update(['yes'])
+            updateAll(['yes']) 
+        }) //atualiza update em Habits
     }
 
     return (

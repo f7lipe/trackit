@@ -5,7 +5,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { useState } from "react";
 import Weekdays from "../universal/Weekdays";
 
-function NewHabit({ addingNewHabit, isAddingNewHabit, token }) {
+function NewHabit({ addingNewHabit, isAddingNewHabit, token, updateAll }) {
 
     const [habitName, setHabitName] = useState("")
     const [selectedDays, setSelectedDays] = useState([]) //será atualizado em Weekdays
@@ -23,6 +23,7 @@ function NewHabit({ addingNewHabit, isAddingNewHabit, token }) {
             const promise = post(URL, data, headers)
             promise.then(() => { 
                 setHabitName("")
+                updateAll(['yes'])
                 addingNewHabit(false) //altera isAddingNewHabit em NewHabit
                 setLoading(false)
             }) 

@@ -17,6 +17,8 @@ function TrackIt(){
     const [habits, setHabits] = useState([])
     const {token} = useContext(TokenContext)
     const {image} = useContext(ImageContext)
+    const [update, setUpdate] = useState(['no']) //terá o valor alterado via callback em TodayHabit
+
    
     function getHabits() {
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today"
@@ -29,13 +31,13 @@ function TrackIt(){
         })
     }
 
-    useEffect(getHabits, [habits, token])
+    useEffect(getHabits, [update,token])
 
     return(
         <>
         <Navbar profilePicture={image}/>
-            {currentPage === 0 && <Habits token={token}/>}
-            {currentPage === 1 && <Today token={token} habits ={habits}/>}
+            {currentPage === 0 && <Habits token={token} updateAll={setUpdate}/>}
+            {currentPage === 1 && <Today token={token} habits ={habits} update={setUpdate}/>}
             {currentPage === 2 && <History token={token}/>}
         <Footer currentPage={setCurrentPage} progress={progress}/>
         </>

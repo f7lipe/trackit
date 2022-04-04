@@ -5,7 +5,7 @@ import NewHabit from "../NewHabit"
 import styled from "styled-components"
 import { useState, useEffect } from "react"
 
-function Habits({ token }) {
+function Habits({ token, updateAll }) {
     const [update, setUpdate] = useState(['no']) //será atualizado em Habit
     const [isAddingNewHabit, setIsAddingNewHabit] = useState(false) //será atualizado também em NewHabit
     const [habits, setHabits] = useState([])
@@ -18,6 +18,7 @@ function Habits({ token }) {
         promise.then(response=>{
             const data = response.data
             setHabits(data)
+            updateAll(['yes'])
         })
     }
 
@@ -31,7 +32,7 @@ function Habits({ token }) {
                 <AddButton onClick={() => setIsAddingNewHabit(true)}>+</AddButton>
             </TitleLabel>
 
-             <NewHabit token={token} addingNewHabit={setIsAddingNewHabit} isAddingNewHabit={isAddingNewHabit} update={setUpdate} />
+             <NewHabit token={token} addingNewHabit={setIsAddingNewHabit} isAddingNewHabit={isAddingNewHabit} update={setUpdate} updateAll={updateAll}/>
 
             {habits.length === 0 &&
                 <ViewLabel>
@@ -39,7 +40,8 @@ function Habits({ token }) {
                 </ViewLabel>}
            
                 
-            {habits.map(habit => <Habit update={setUpdate} 
+            {habits.map(habit => <Habit update={setUpdate}
+                                        updateAll={updateAll} 
                                         key={habit.id} 
                                         name={habit.name} 
                                         id={habit.id} 
