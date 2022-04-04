@@ -3,13 +3,11 @@ import evaluateProgess from "../../functions/evaluateProgress"
 import moment from "moment"
 import 'moment/locale/pt-br'
 import styled from "styled-components"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import TodayHabit from "../TodayCard"
 
 function Today({ token, habits }) {
     
-    const [update, setUpdate] = useState(['no']) //terá o valor alterado via callback em TodayHabit
-
     const doneHabits = countDone(habits)
     const percentProgress = evaluateProgess(doneHabits, habits.length)
     const currentDate = moment().format('LL')
@@ -31,8 +29,7 @@ function Today({ token, habits }) {
                     done={todayHabit.done}
                     currentSequence={todayHabit.currentSequence}
                     highestSequence={todayHabit.highestSequence}
-                    token={token}
-                    update={setUpdate} 
+                    token={token} 
                     />)
             }
 

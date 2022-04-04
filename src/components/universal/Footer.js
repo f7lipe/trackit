@@ -26,7 +26,7 @@ function Footer(props) {
                     styles={buildStyles({
                         backgroundColor: `rgb(247, 247, 247)`,
                         textColor: `${selectedPage === 1 ? `#FF3B30` : `gray`} `,
-                        pathColor: `${selectedPage === 1 ? `#FF3B30` : `gray`} `,
+                        pathColor: `${percentProgress > 0 ?  selectedPage === 1 ? `#FF3B30` : `gray` : `rgb(247, 247, 247)`} `,
                         trailColor: "transparent"
                     })} />
             </ProgressBar>

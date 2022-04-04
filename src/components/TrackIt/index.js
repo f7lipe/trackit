@@ -29,7 +29,7 @@ function TrackIt(){
         })
     }
 
-    useEffect(getHabits, [habits])
+    useEffect(getHabits, [habits, token])
 
     return(
         <>
