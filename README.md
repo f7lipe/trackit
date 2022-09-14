@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# <p align = "center"> TrackIt </p>
+#### <p align = "center"> Project developed at Driven Education </p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+   <img src="https://lh3.googleusercontent.com/fife/AAbDypBhIMIyN2yHKvbmhirECtWPDoGfk3Xge44d1WBNpxUc9Y5BGn_0ITRvV_0UxtC71a2fbT_u0yaYi3sYY91BXrWvmVmXZGJFu_aEwPME0eNOJfB6QoSkhf55Gm1sVMRR8ORdx6uGUUPeLEE9vx8Q42yywjt42UdrACQvHSsnpet9zA5RgsWnbJyA3Qp-sXDHhtIIqly0IzkVIxmK73_DTR480FjiZzY0iH-Rwq_FCtcDOC6tJsUpRusXVXtdkSdooALql3XL4rpYAKwBP6c6OR_Xc1HtfUG9ZGMHnW8WWuXfP-3Cvlkt9wQeyAh0S2s1or_r5kWF8hFIkjna4HsYJJAymPCBdJulmFVYbhinmrGl_yHq4DFlPzjfv7tk3mO4iWXc1Z-57TJz8L52h7O47M701A4hBUUCv1Xwr1AhdySGZnhOQ8ciL6lNnRY0sF6NWeiwPi4LQ_4vDc1SQP1FCDz2i3y---vHbabgzyip3_jaVmdMSxFOELGoHaR4yGG8MxQPpjxYSUGnhYBkJeu0Qr7IfCyGPCJRxWhjNyKgsvn9l5b9HhT-ks5L9L_9VB7LzAM0uSfiYfbouUH2R0V-oaeIcf3_CdBQIRWjMZSvpC7TKK7jok8G7_b84-zGjh3YGmZFZBk3FGvJFKXQZJrXLRGrMwHJ_7qoyfPx7Kve3cwtXjAxRfuEABJb1NKR9qqtuMa3r7nebZHFbNGYR5Q3OwNS8rHHiVKQ-zKWVch0YxuVmmXbGqj7bk3Ho6t9eYRi7EZI9vT_z7uOmb7yKqKZV2jKfHUE-XpcnPPY6jC-jIZVzsl9GL4B0GEwjCpnLpilhe0-hVVFh0HdOSW3c9RBJjZJfeX30kusbXcxRUtdhS2_cZZOQBhMwyj7_4NQ_r8cV8rw4VdcENtbgDjjtQnbjAbZngj02bukqz87vBuBrr4PaEfywUqyBRrq9PuSqzoNFw9_0LYsrysH6kV58f9fA7Kcf2wyXmhWG4eH_QF0XcPBfGkajbWMrFoE_26v14kXiyo-eP4YUjE2hgyTwDAk_9sWj89tOyKP3j1ShTHKqRp1yoroEc1mrbW3CRJVShWQFRw2o6c_cN13K1W2ykwh2ebLjSWFUGaLZFxti0F9aYlcMqNAyVHvZNpO3IBCvEW2Ie-VjFt01YRxaL2Hrnov60Di0BVxxV26276isxE2vT_kR0DoMhBmLpDhw-34PlrGQQXD_tUs42aF2g4brHrx1ZJXYRLkmkEv94zqcUPWE0dquPHW3V3aOXfi1VY29h-H4lcic4inw2ZhpHOrERoE3-pENtvfkO2N-f-7Ev_AQAkzTZ6FGUddWSfMLLj6lHtHPWNnr2JWGa-BJ6rlPFpFZlhTiyx7cbZV5-EEqyma7qb2gcoUYHlsg8E=w1360-h602"/>
+</p>
 
-## Available Scripts
+<p align = "center">
+   <img src="https://img.shields.io/badge/author-FILIPE_CORREIA-4dae71?style=flat-square" />
+   <img src="https://img.shields.io/github/languages/count/f7lipe/projeto19-drivenpass?color=4dae71&style=flat-square" />
+</p>
 
-In the project directory, you can run:
 
-### `npm start`
+##  :clipboard: Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Browsing the internet can be a very fun activity, but at the same time, very dangerous. Numerous studies and surveys (national and international) show that the number of virtual scams continues to grow. Which raises the question: how to protect ourselves? This API allows you to securely store your credit card information, websites, wifi credentials, notes and more.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+***
 
-### `npm test`
+## :computer:	 Technologies and concepts 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- ReactJs
+- Context API
+- Styled Components 
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🏁 Running the aplication 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This project was initialized with [Create React App](https://github.com/facebook/create-react-app), so make sure you have the latest stable version of [npm](https://www.npmjs.com/) for running locally.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+⤵️ Clone this repository on your machine:
 
-### `npm run eject`
+```
+git clone https://github.com/f7lipe/trackit
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+⚙️ Create a .env file in the root of your project folder and configute it to look something like this
+```yml
+   PORT = 3000
+   API = https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit
+``` 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+💻 Inside the folder, run the following command to install the dependencies.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+npm install
+```
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+🏁 Finished the process, just start the app
+```
+npm start
+```
