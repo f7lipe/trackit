@@ -8,12 +8,13 @@
 <p align = "center">
    <img src="https://img.shields.io/badge/author-FILIPE_CORREIA-4dae71?style=flat-square" />
    <img src="https://img.shields.io/github/languages/count/f7lipe/projeto19-drivenpass?color=4dae71&style=flat-square" />
+    <img src="https://img.shields.io/badge/responsiveness-Mobile-4dae71?style=flat-square" />
 </p>
 
 
 ##  :clipboard: Description
 
-Browsing the internet can be a very fun activity, but at the same time, very dangerous. Numerous studies and surveys (national and international) show that the number of virtual scams continues to grow. Which raises the question: how to protect ourselves? This API allows you to securely store your credit card information, websites, wifi credentials, notes and more.
+With this single page application, you will be able to save habits to track them during the week. All data is managed by a third-party mock API, however you can build your own API to serve this application.
 
 ***
 
