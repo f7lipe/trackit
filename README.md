@@ -9,7 +9,7 @@
    <img src="https://img.shields.io/badge/author-FILIPE_CORREIA-4dae71?style=flat-square" />
    <img src="https://img.shields.io/github/languages/count/f7lipe/projeto19-drivenpass?color=4dae71&style=flat-square" />
     <img src="https://img.shields.io/badge/responsiveness-Mobile-4dae71?style=flat-square" />
-    <img src="https://img.shields.io/badge/stack-Front-end-4dae71?style=flat-square" />
+    <img src="https://img.shields.io/badge/stack-Front_end-4dae71?style=flat-square" />
 </p>
 
 
