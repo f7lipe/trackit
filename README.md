@@ -39,7 +39,7 @@ With this single page application, you will be able to save habits to track them
 
 ## Demo
    
-   You can check out a working version of this project on Vercel. Click <p href="https://projeto10-trackit-q26970vc2-f7lipe.vercel.app"> here </p>
+   You can check out a working version of this project on Vercel. Click [here](https://projeto10-trackit-q26970vc2-f7lipe.vercel.app) </p>
    
 ```yml
   E-mail: lightyear@seed.com
